@@ -1,0 +1,20 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: http://127.0.0.1:8000/api/
+paths:
+  /orders:
+    get:
+      responses:
+        '200':
+          description: OK
+  /colors:
+    get:
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: OK
+

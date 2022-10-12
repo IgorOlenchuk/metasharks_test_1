@@ -14,7 +14,6 @@ class Color(models.Model):
 
 class Brand(models.Model):
     title = models.CharField(max_length=50, verbose_name='Марка')
-
     class Meta:
         verbose_name = 'марка'
         verbose_name_plural = 'марки'
@@ -53,12 +52,18 @@ class Order(models.Model):
         related_name='model',
         verbose_name='Модель'
     )
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.CASCADE,
+        related_name='orders',
+        verbose_name='Марка'
+    )
     amount = models.CharField(max_length=50, verbose_name='Количество')
-    time = models.DateTimeField(default=False, verbose_name='Дата') #указать дату по умолчанию - текущая
-
+    order_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата', db_index=True)
     class Meta:
+        ordering = ('-order_date',)
         verbose_name = 'заказ'
         verbose_name_plural = 'заказы'
 
     def __str__(self):
-        return f'Дата заказа {self.time}'
+        return f'Дата заказа {self.order_date}'
