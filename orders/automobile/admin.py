@@ -10,7 +10,7 @@ class ColorAdmin(admin.ModelAdmin):
 
 @admin.register(Model)
 class ModelAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('model',)
 
 
 @admin.register(Brand)
@@ -20,4 +20,4 @@ class BrandAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('order_date', 'color', 'model', 'amount')
+    list_display = ('order_date', 'color', 'car', 'amount')

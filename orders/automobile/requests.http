@@ -1,1 +1,8 @@
 GET http://127.0.0.1:8000/api/orders/
+Content-Type: application/json
+
+{
+    "color": 4,
+    "model": "S200, Suzuki",
+    "amount": "7"
+}

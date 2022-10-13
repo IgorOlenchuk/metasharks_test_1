@@ -1,11 +1,16 @@
-from django.urls import path
-from automobile.views import colors_list, models_list, brands_list, orders_list, order_detail
+from django.urls import include, path
+from automobile.views import ColorsViewSet, ModelsViewSet, BrandsViewSet, OrdersViewSet
+
+from rest_framework.routers import SimpleRouter
+
+
+router = SimpleRouter()
+router.register('colors', ColorsViewSet)
+router.register('models', ModelsViewSet)
+router.register('brands', BrandsViewSet)
+router.register('orders', OrdersViewSet)
 
 
 urlpatterns = [
-    path('colors/', colors_list, name='colors_list'),
-    path('models/', models_list, name='models_list'),
-    path('brands/', brands_list, name='brands_list'),
-    path('orders/', orders_list, name='orders_list'),
-    path('orders/<int:pk>/', order_detail, name='order_detail'),
-]
+    path('', include(router.urls)),
+] 

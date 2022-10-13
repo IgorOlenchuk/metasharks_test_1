@@ -12,25 +12,22 @@ class ColorSerializer(serializers.ModelSerializer):
 
 class ModelSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField(read_only=True)
-
     class Meta:
         model = Model
-        fields = ['id', 'title', 'brand']
+        fields = ['id', 'model', 'brand']
 
 
 class BrandSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Brand
         fields = ['id', 'title']
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    brand = serializers.StringRelatedField(read_only=True)
     color = serializers.StringRelatedField(read_only=True)
-    model = serializers.StringRelatedField(read_only=True)
+    car = ModelSerializer()
     amount = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Order
-        fields = ['id', 'order_date', 'color', 'model', 'brand', 'amount']
+        fields = ['id', 'order_date', 'color', 'car', 'amount']

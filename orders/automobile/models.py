@@ -14,6 +14,7 @@ class Color(models.Model):
 
 class Brand(models.Model):
     title = models.CharField(max_length=50, verbose_name='Марка')
+
     class Meta:
         verbose_name = 'марка'
         verbose_name_plural = 'марки'
@@ -23,45 +24,37 @@ class Brand(models.Model):
 
 
 class Model(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Модель')
+    model = models.CharField(max_length=50, verbose_name='Модель')
     brand = models.ForeignKey(
         Brand,
         on_delete=models.CASCADE,
-        related_name='brand',
-        verbose_name='Марка'
+        related_name='models',
+        verbose_name='Марка автомобиля'
     )
-
     class Meta:
         verbose_name = 'модель'
         verbose_name_plural = 'модели'
 
     def __str__(self):
-        return self.title
+        return self.model
 
 
 class Order(models.Model):
     color = models.ForeignKey(
         Color,
         on_delete=models.CASCADE,
-        related_name='color',
+        related_name='orders',
         verbose_name='Цвет'
     )
-    model = models.ForeignKey(
+    car = models.ForeignKey(
         Model,
         on_delete=models.CASCADE,
-        related_name='model',
-        verbose_name='Модель'
-    )
-    brand = models.ForeignKey(
-        Brand,
-        on_delete=models.CASCADE,
         related_name='orders',
-        verbose_name='Марка'
+        verbose_name='Автомобиль'
     )
     amount = models.CharField(max_length=50, verbose_name='Количество')
     order_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата', db_index=True)
     class Meta:
-        ordering = ('-order_date',)
         verbose_name = 'заказ'
         verbose_name_plural = 'заказы'
 
