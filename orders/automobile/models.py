@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Color(models.Model):
@@ -53,7 +54,7 @@ class Order(models.Model):
         verbose_name='Автомобиль'
     )
     amount = models.CharField(max_length=50, verbose_name='Количество')
-    order_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата', db_index=True)
+    order_date = models.DateTimeField(default=timezone.now, verbose_name='Дата', db_index=True)
     class Meta:
         verbose_name = 'заказ'
         verbose_name_plural = 'заказы'
